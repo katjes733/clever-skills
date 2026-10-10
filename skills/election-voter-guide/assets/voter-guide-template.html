@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<style>
+:root {
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --surface-2: #efede6;
+  --text: #1c1c1a;
+  --muted: #55544f;
+  --border: #d6d3c8;
+  --accent: #1f4e79;
+  --accent-soft: #e3edf6;
+  --on-accent: #ffffff;
+  --strong: #14633a;
+  --strong-bg: #e1f1e7;
+  --moderate: #7a4e00;
+  --moderate-bg: #fbefd2;
+  --good: #3b6a2a;
+  --good-bg: #eaf3dc;
+  --weak: #9a4a12;
+  --weak-bg: #f8e4d3;
+  --poor: #9b2222;
+  --poor-bg: #f9e2e2;
+  --unknown: #4b4a46;
+  --unknown-bg: #ebeae5;
+  --focus: #0b57d0;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14150f;
+    --surface: #1e1f19;
+    --surface-2: #272820;
+    --text: #ecebe4;
+    --muted: #b5b3a8;
+    --border: #3a3b31;
+    --accent: #8fbbe8;
+    --accent-soft: #1f2f3f;
+    --on-accent: #0f1a26;
+    --strong: #7fd6a2;
+    --strong-bg: #173222;
+    --moderate: #f0c46a;
+    --moderate-bg: #3a2d10;
+    --good: #b4dc86;
+    --good-bg: #26331a;
+    --weak: #f0a56a;
+    --weak-bg: #3a2412;
+    --poor: #f2a0a0;
+    --poor-bg: #3b1a1a;
+    --unknown: #c9c7bc;
+    --unknown-bg: #2c2d25;
+    --focus: #8fb7ff;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14150f;
+  --surface: #1e1f19;
+  --surface-2: #272820;
+  --text: #ecebe4;
+  --muted: #b5b3a8;
+  --border: #3a3b31;
+  --accent: #8fbbe8;
+  --accent-soft: #1f2f3f;
+  --on-accent: #0f1a26;
+  --strong: #7fd6a2;
+  --strong-bg: #173222;
+  --moderate: #f0c46a;
+  --moderate-bg: #3a2d10;
+  --good: #b4dc86;
+  --good-bg: #26331a;
+  --weak: #f0a56a;
+  --weak-bg: #3a2412;
+  --poor: #f2a0a0;
+  --poor-bg: #3b1a1a;
+  --unknown: #c9c7bc;
+  --unknown-bg: #2c2d25;
+  --focus: #8fb7ff;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible, [role="tab"]:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 16px 56px; }
+header.top { padding: 24px 0 8px; }
+header.top h1 { margin: 0 0 4px; font-size: 1.75rem; line-height: 1.2; }
+header.top .sub { color: var(--muted); margin: 0; }
+.countdown { display: inline-block; margin-top: 10px; padding: 4px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--text); font-weight: 600; border: 1px solid var(--border); }
+.banner { margin: 14px 0 6px; padding: 10px 14px; border: 1px dashed var(--border); border-radius: var(--radius); background: var(--surface); color: var(--muted); font-size: 0.92rem; }
+.banner.sample { border-style: solid; border-color: var(--moderate); background: var(--moderate-bg); color: var(--text); }
+nav.tabs { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 6px; overflow-x: auto; }
+nav.tabs button { flex: 0 0 auto; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; cursor: pointer; }
+nav.tabs button[aria-selected="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 600; }
+section.panel { padding-top: 18px; }
+section.panel[hidden] { display: none; }
+h2 { font-size: 1.35rem; margin: 0 0 12px; }
+h3 { font-size: 1.1rem; margin: 0 0 8px; }
+h4 { font-size: 0.98rem; margin: 12px 0 6px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin: 0 0 14px; }
+.card.rec { border-width: 2px; border-color: var(--accent); }
+.muted { color: var(--muted); }
+.small { font-size: 0.9rem; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.badge { display: inline-block; padding: 1px 9px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); }
+.badge.rec { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.badge.warn { background: var(--moderate-bg); color: var(--moderate); border-color: var(--moderate); }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 6px; font-weight: 700; font-size: 0.88rem; border: 1.5px solid currentColor; white-space: nowrap; }
+.chip .sym { font-weight: 800; }
+.chip .bar { letter-spacing: 1px; font-weight: 400; }
+.chip-strong { color: var(--strong); background: var(--strong-bg); }
+.chip-good { color: var(--good); background: var(--good-bg); border-width: 1px; }
+.chip-mixed { color: var(--moderate); background: var(--moderate-bg); border-style: dashed; }
+.chip-weak { color: var(--weak); background: var(--weak-bg); border-style: dotted; }
+.chip-poor { color: var(--poor); background: var(--poor-bg); border-style: dotted; border-width: 3px; }
+.chip-sm { font-size: 0.8rem; padding: 1px 8px; }
+.chip-sm .bar { display: none; } /* the horizontal bar beside it already shows the level */
+@media (max-width: 560px) {
+  /* Name and rating share the first row; the bar gets the full width below. */
+  .hb-line:not(.hb-line2) { grid-template-columns: minmax(0, 1fr) auto !important; row-gap: 3px; }
+  .hb-line:not(.hb-line2) > .hb-who { grid-column: 1; grid-row: 1; font-weight: 600; }
+  .hb-line:not(.hb-line2) > .chip, .hb-line:not(.hb-line2) > strong { grid-column: 2; grid-row: 1; justify-self: end; }
+  .hb-line:not(.hb-line2) > .hb-track { grid-column: 1 / -1; grid-row: 2; }
+}
+/* Horizontal bars: width carries the rating; the text label and symbol always sit beside it. */
+.hb { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin: 6px 0 10px; }
+.hb-row { display: grid; grid-template-columns: 1fr; gap: 3px; }
+.hb-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+.hb-name { font-weight: 700; }
+.hb-tier { font-size: 0.78rem; color: var(--muted); }
+.hb-line { display: grid; grid-template-columns: minmax(64px, 28%) minmax(0, 1fr) auto; align-items: center; gap: 8px; }
+.hb-who { font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hb-track { position: relative; height: 14px; border: 1.5px solid var(--border); border-radius: 7px; background: var(--surface-2); overflow: hidden; }
+.hb-fill { display: block; height: 100%; border-radius: 6px 0 0 6px; border-right: 2px solid var(--surface); }
+.hb-strong { background: var(--strong); }
+.hb-good { background: var(--good); }
+.hb-mixed { background: var(--moderate); background-image: repeating-linear-gradient(45deg, transparent 0 4px, rgba(255,255,255,0.35) 4px 6px); }
+.hb-weak { background: var(--weak); background-image: radial-gradient(rgba(255,255,255,0.45) 1.2px, transparent 1.4px); background-size: 6px 6px; }
+.hb-poor { background: var(--poor); background-image: repeating-linear-gradient(90deg, transparent 0 3px, rgba(255,255,255,0.45) 3px 5px); }
+.hb-unknown { border-style: dashed; background: transparent; }
+.hb-score .hb-track { height: 18px; border-radius: 9px; }
+.hb-band { position: absolute; top: 0; bottom: 0; background: var(--accent-soft); border-left: 2px dashed var(--accent); border-right: 2px dashed var(--accent); }
+.hb-mark { position: absolute; top: -2px; bottom: -2px; width: 4px; margin-left: -2px; background: var(--accent); }
+.cmp { margin-top: 12px; }
+.cmp h4 { margin: 0 0 4px; }
+.chip-unknown { color: var(--unknown); background: var(--unknown-bg); border-style: double; border-width: 3px; }
+.chip-na { color: var(--muted); background: transparent; border-color: var(--border); font-weight: 600; }
+table { border-collapse: collapse; width: 100%; font-size: 0.94rem; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+th { font-weight: 700; background: var(--surface-2); }
+.tablewrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.tablewrap table { min-width: 520px; }
+ul.plain { margin: 0; padding-left: 20px; }
+ul.issuelist { list-style: none; margin: 10px 0 0; padding: 0; }
+ul.issuelist li { padding: 8px 0; border-top: 1px solid var(--border); }
+details { margin: 8px 0; }
+summary { cursor: pointer; font-weight: 600; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+.filters button { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 600; }
+.filters input[type="search"] { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; min-width: 180px; }
+.pick { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); }
+.pick label { display: inline-flex; align-items: center; gap: 6px; margin: 4px 14px 4px 0; cursor: pointer; }
+.pick input { width: 18px; height: 18px; }
+.callout { border-left: 4px solid var(--moderate); background: var(--moderate-bg); padding: 10px 14px; border-radius: 6px; margin: 0 0 14px; }
+.status-today, .status-soon { font-weight: 700; }
+.btn { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent); font: inherit; font-weight: 600; cursor: pointer; }
+.btn.secondary { background: transparent; color: var(--accent); }
+.empty { padding: 20px; text-align: center; color: var(--muted); }
+.levelhead { margin: 20px 0 8px; font-size: 1.05rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+@media (prefers-reduced-motion: no-preference) {
+  nav.tabs button, .filters button { transition: background 0.15s ease; }
+}
+@media (max-width: 520px) {
+  header.top h1 { font-size: 1.45rem; }
+  .card { padding: 14px; }
+}
+@media print {
+  body { background: #fff; color: #000; }
+  nav.tabs, header.top .countdown, .filters, .no-print, .pick { display: none !important; }
+  section.panel { display: none !important; }
+  body.print-cheat #panel-cheat { display: block !important; }
+  body:not(.print-cheat) section.panel:not([hidden]) { display: block !important; }
+  .card, .tablewrap { border-color: #999; break-inside: avoid; }
+  a { color: #000; text-decoration: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1 id="g-title"></h1>
+    <p class="sub" id="g-sub"></p>
+    <div id="g-countdown" class="countdown" hidden></div>
+    <div id="g-banners"></div>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Guide sections" id="g-tabs"></nav>
+  <main id="g-panels"></main>
+</div>
+
+<script id="guide-data" type="application/json">__GUIDE_DATA__</script>
+<script>
+(function () {
+  "use strict";
+
+  // ---------- Load data ----------
+  var GUIDE;
+  try {
+    GUIDE = JSON.parse(document.getElementById("guide-data").textContent);
+  } catch (e) {
+    document.getElementById("g-panels").textContent = "The guide data could not be read.";
+    return;
+  }
+  var meta = GUIDE.meta || {};
+  var races = GUIDE.races || [];
+  var measures = GUIDE.measures || [];
+
+  // ---------- Helpers (all text goes through textContent; URLs restricted to http/https) ----------
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(function (k) {
+        var v = attrs[k];
+        if (v === null || v === undefined || v === false) return;
+        if (k === "class") n.className = v;
+        else if (k === "text") n.textContent = v;
+        else n.setAttribute(k, v === true ? "" : v);
+      });
+    }
+    (kids || []).forEach(function (c) {
+      if (c === null || c === undefined || c === false) return;
+      n.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return n;
+  }
+  function safeUrl(u) {
+    if (typeof u !== "string") return "";
+    return /^https?:\/\//i.test(u.trim()) ? u.trim() : "";
+  }
+  function link(label, url) {
+    var u = safeUrl(url);
+    if (!u) return el("span", { text: label || "" });
+    return el("a", { href: u, target: "_blank", rel: "noopener noreferrer", text: label || u });
+  }
+  function para(text, cls) { return el("p", { class: cls || "", text: text || "" }); }
+  function isoToDate(s) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || "");
+    if (!m) return null;
+    return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  }
+  function daysFromToday(d) {
+    var t = new Date(); t = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+    return Math.round((d.getTime() - t.getTime()) / 86400000);
+  }
+  function fmtDate(d) {
+    try { return d.toLocaleDateString(undefined, { weekday: "short", year: "numeric", month: "short", day: "numeric" }); }
+    catch (e) { return d.toDateString(); }
+  }
+
+  // Rating encoding: text label + shape-distinct symbol + bar. Color is only a supporting layer.
+  var RATING = {
+    strong:   { label: "Strong fit",      sym: "✓✓", bar: "▰▰▰▰▰", pct: 100, cls: "chip-strong" },
+    good:     { label: "Good fit",        sym: "✓",  bar: "▰▰▰▰▱", pct: 75,  cls: "chip-good" },
+    mixed:    { label: "Mixed",           sym: "~",  bar: "▰▰▰▱▱", pct: 50,  cls: "chip-mixed" },
+    weak:     { label: "Weak fit",        sym: "✗",  bar: "▰▰▱▱▱", pct: 25,  cls: "chip-weak" },
+    poor:     { label: "Poor fit",        sym: "✗✗", bar: "▰▱▱▱▱", pct: 8,   cls: "chip-poor" },
+    unknown:  { label: "Not enough info", sym: "?",  bar: "▱▱▱▱▱", pct: 0,   cls: "chip-unknown" },
+    na:       { label: "Not applicable",  sym: "–",  bar: "",      pct: 0,   cls: "chip-na" }
+  };
+  RATING.moderate = RATING.mixed;
+  function chip(rating, small) {
+    var r = RATING[rating] || RATING.unknown;
+    var kids = [el("span", { class: "sym", "aria-hidden": "true", text: r.sym }), el("span", { text: r.label })];
+    if (r.bar) kids.push(el("span", { class: "bar", "aria-hidden": "true", text: r.bar }));
+    return el("span", { class: "chip " + r.cls + (small ? " chip-sm" : "") }, kids);
+  }
+  function ratingKey(x) { return x === "moderate" ? "mixed" : x; }
+  // Horizontal bar: width = rating strength; unknown shows an empty dashed track.
+  function hbar(rating, track) {
+    var r = RATING[ratingKey(rating)] || RATING.unknown;
+    var t = el("span", { class: "hb-track", "aria-hidden": "true" });
+    if (r.pct > 0) t.appendChild(el("span", { class: "hb-fill hb-" + ratingKey(rating), style: "width:" + r.pct + "%" }));
+    else t.classList.add("hb-unknown");
+    return t;
+  }
+  function tierOf(issue) {
+    var p = GUIDE.profile || {}, nm = String(issue || "").toLowerCase();
+    var top = (p.top_issues || []).map(function (x) { return String(x).toLowerCase(); });
+    var i = top.indexOf(nm);
+    if (i >= 0) return i === 0 ? "Your #1 priority" : "Priority #" + (i + 1);
+    return "Also important";
+  }
+  function scoreBlock(fit) {
+    var box = el("div", { class: "hb hb-score", style: "margin-top:8px" });
+    var head = el("div", { class: "hb-head" }, [el("strong", { text: "Alignment: " + fit.score + " / 100" })]);
+    if (typeof fit.score_low === "number" && fit.score_low !== fit.score_high) head.appendChild(el("span", { class: "small muted", text: "likely range " + fit.score_low + " to " + fit.score_high }));
+    box.appendChild(head);
+    var tr = el("span", { class: "hb-track", "aria-hidden": "true" });
+    if (typeof fit.score_low === "number" && fit.score_high > fit.score_low) tr.appendChild(el("span", { class: "hb-band", style: "left:" + fit.score_low + "%; width:" + (fit.score_high - fit.score_low) + "%" }));
+    tr.appendChild(el("span", { class: "hb-mark", style: "left:" + fit.score + "%" }));
+    box.appendChild(tr);
+    if (typeof fit.coverage === "number") box.appendChild(el("div", {}, [el("span", { class: "badge" + (fit.coverage < 50 ? " warn" : ""), text: "Evidence covers " + fit.coverage + "% of what matters here" + (fit.coverage < 50 ? " (limited)" : "") })]));
+    return box;
+  }
+  function issueBars(by) {
+    var box = el("div", { class: "hb" });
+    by.forEach(function (bi) {
+      if (bi.rating === "na") return;
+      var row = el("div", { class: "hb-row" });
+      row.appendChild(el("div", { class: "hb-head" }, [el("span", { class: "hb-name", text: bi.issue || "" }), el("span", { class: "hb-tier", text: tierOf(bi.issue) })]));
+      row.appendChild(el("div", { class: "hb-line hb-line2", style: "grid-template-columns: minmax(0,1fr) auto" }, [hbar(bi.rating), chip(bi.rating, true)]));
+      if (bi.note) row.appendChild(el("div", { class: "small", text: bi.note }));
+      if (bi.basis) row.appendChild(el("div", { class: "small muted", text: "Basis: " + (bi.basis === "party_platform" ? "party platform (inferred)" : bi.basis) }));
+      box.appendChild(row);
+    });
+    return box;
+  }
+  // Short label for bars. Handles tickets ("Hobbs (running mate: X Kerr)", "Hobbs / Kerr", "Hobbs and Kerr"):
+  // only the top-of-ticket candidate is used, never the running mate.
+  // Name helpers. `baseName` is the candidate at the top of the ticket; `ticketName` adds the running mate for places
+  // where the voter marks a ballot choice. Bars use `surname` only.
+  function baseName(c) {
+    var n = String(c.name || "").replace(/\([^)]*\)?/g, " ").split(/\s*[\/&+]\s*|\s+(?:and|with|running mate:?)\s+/i)[0];
+    n = n.replace(/\s+/g, " ").trim();
+    return n || String(c.name || "");
+  }
+  function displayName(c) { return c.running_mate ? baseName(c) : String(c.name || "Candidate"); }
+  function ticketName(c) { return c.running_mate ? baseName(c) + " (with " + c.running_mate + ")" : String(c.name || "Candidate"); }
+  function surname(c) {
+    if (c.short_name) return String(c.short_name);
+    var n = baseName(c).split(/,\s*/)[0];
+    n = n.replace(/[^\p{L}\p{N}.'\u2019\- ]/gu, " ").replace(/\s+/g, " ").trim();
+    var t = n.split(" ").filter(Boolean);
+    while (t.length > 1 && /^(jr|sr|ii|iii|iv)\.?$/i.test(t[t.length - 1])) t.pop();
+    var last = (t.length ? t[t.length - 1] : String(c.name || "")).replace(/\.$/, "");
+    return last || String(c.name || "");
+  }
+  function shortName(c, all) {
+    var last = surname(c);
+    var clash = (all || []).filter(function (o) { return surname(o) === last; }).length > 1;
+    if (!clash) return last;
+    return baseName(c) || last;
+  }
+  function compareBlock(cands) {
+    var order = [], seen = {};
+    cands.forEach(function (c) { ((c.fit && c.fit.by_issue) || []).forEach(function (b) { if (!seen[b.issue]) { seen[b.issue] = []; order.push(b.issue); } seen[b.issue].push(b.rating); }); });
+    var rows = order.filter(function (i) { return seen[i].some(function (x) { return x !== "na"; }); });
+    if (!rows.length) return null;
+    var wrap = el("div", { class: "cmp" });
+    wrap.appendChild(el("h4", { text: "Side by side on your issues" }));
+    wrap.appendChild(el("p", { class: "small muted", text: "Longer bar = closer to what you told me. A dashed empty bar means not enough information." }));
+    var box = el("div", { class: "hb" });
+    rows.forEach(function (issue) {
+      var row = el("div", { class: "hb-row" });
+      row.appendChild(el("div", { class: "hb-head" }, [el("span", { class: "hb-name", text: issue }), el("span", { class: "hb-tier", text: tierOf(issue) })]));
+      cands.forEach(function (c) {
+        var b = ((c.fit && c.fit.by_issue) || []).filter(function (x) { return x.issue === issue; })[0];
+        var rt = b ? b.rating : "unknown";
+        if (rt === "na") return;
+        row.appendChild(el("div", { class: "hb-line" }, [el("span", { class: "hb-who", text: shortName(c, cands) }), hbar(rt), chip(rt, true)]));
+      });
+      box.appendChild(row);
+    });
+    wrap.appendChild(box);
+    return wrap;
+  }
+  var CONF = { very_high: "Very high confidence", high: "High confidence", medium: "Medium confidence", low: "Low confidence", very_low: "Very low confidence" };
+  var DECISION = { clear: "Clear best fit", lean: "Leaning", slight: "Slight edge", toss_up: "Too close to call" };
+  function scoreBar(n) { var f = Math.max(0, Math.min(10, Math.round(n / 10))); return new Array(f + 1).join("\u25B0") + new Array(11 - f).join("\u25B1"); }
+  var DEPTH = { deep: "Deep public record", moderate: "Moderate public record", thin: "Thin public record" };
+
+  // ---------- Persisted per-viewer choices (convenience only; wrapped in try/catch) ----------
+  var storeKey = "vg:" + (meta.election_date || "") + ":" + (meta.jurisdiction || "") + ":" + (meta.election_name || "");
+  var state = { picks: {}, done: {} };
+  function loadState() {
+    try { var s = JSON.parse(localStorage.getItem(storeKey) || "null"); if (s && typeof s === "object") { state.picks = s.picks || {}; state.done = s.done || {}; } } catch (e) { /* storage unavailable */ }
+  }
+  function saveState() { try { localStorage.setItem(storeKey, JSON.stringify(state)); } catch (e) { /* ignore */ } }
+  loadState();
+
+  // ---------- Header ----------
+  document.getElementById("g-title").textContent = meta.title || "Voter Guide";
+  var subParts = [meta.election_name, meta.jurisdiction].filter(Boolean);
+  var ed = isoToDate(meta.election_date);
+  if (ed) subParts.push(fmtDate(ed));
+  document.getElementById("g-sub").textContent = subParts.join(" · ");
+  if (ed) {
+    var dd = daysFromToday(ed), cd = document.getElementById("g-countdown");
+    cd.hidden = false;
+    cd.textContent = dd > 1 ? dd + " days until Election Day" : dd === 1 ? "Election Day is tomorrow" : dd === 0 ? "Election Day is today" : "Election Day was " + Math.abs(dd) + " day" + (Math.abs(dd) === 1 ? "" : "s") + " ago";
+  }
+  var banners = document.getElementById("g-banners");
+  if (meta.is_sample) banners.appendChild(el("div", { class: "banner sample", role: "note", text: "Sample data: fictional people, places, and sources. This page is for testing the template." }));
+  banners.appendChild(el("div", { class: "banner", role: "note", text: meta.disclaimer || ("Unofficial, personal voter guide prepared " + (meta.generated || "") + ". It is not an official ballot or government publication. Confirm dates, rules, and your ballot with your local election office. Fit ratings compare options to the priorities you gave; they are not endorsements. You make the final call.") }));
+
+  // ---------- Panels ----------
+  var panels = [];
+  function addPanel(id, label, node) { panels.push({ id: id, label: label, node: node }); }
+
+  function hasFit() {
+    return races.some(function (r) { return (r.candidates || []).some(function (c) { return c.fit && c.fit.overall; }) || (r.recommendation && true); }) ||
+           measures.some(function (m) { return m.lean || (m.by_issue && m.by_issue.length); });
+  }
+
+  // Overview
+  (function () {
+    var n = el("div");
+    var e = GUIDE.election || {};
+    n.appendChild(el("h2", { text: "Overview" }));
+    var c = el("div", { class: "card" });
+    c.appendChild(el("div", { class: "row" }, [el("span", { class: "badge", text: e.type_label || e.type || "Election" })]));
+    if (e.summary) c.appendChild(para(e.summary));
+    if ((e.system_notes || []).length) {
+      var ul = el("ul", { class: "plain" });
+      e.system_notes.forEach(function (s) { ul.appendChild(el("li", { text: s })); });
+      c.appendChild(ul);
+    }
+    n.appendChild(c);
+
+    if ((GUIDE.open_questions || []).length) {
+      var co = el("div", { class: "callout", role: "note" }, [el("strong", { text: "Check before you rely on this" })]);
+      var ul2 = el("ul", { class: "plain" });
+      GUIDE.open_questions.forEach(function (q) { ul2.appendChild(el("li", { text: q })); });
+      co.appendChild(ul2);
+      n.appendChild(co);
+    }
+
+    if ((GUIDE.timeline || []).length) {
+      n.appendChild(el("h3", { text: "Key dates" }));
+      var tb = el("tbody");
+      GUIDE.timeline.forEach(function (t) {
+        var d = isoToDate(t.date), d2 = isoToDate(t.end_date), status = "", cls = "";
+        if (d && d2) {
+          var ks = daysFromToday(d), ke = daysFromToday(d2);
+          if (ks > 0) { status = "Opens in " + ks + " day" + (ks === 1 ? "" : "s"); }
+          else if (ke >= 0) { status = ke === 0 ? "Open now (last day today)" : "Open now (" + ke + " day" + (ke === 1 ? "" : "s") + " left)"; cls = "status-today"; }
+          else { status = "Closed"; }
+        } else if (d) {
+          var k = daysFromToday(d);
+          if (k < 0) { status = "Passed"; }
+          else if (k === 0) { status = "Today"; cls = "status-today"; }
+          else if (k <= 7) { status = "In " + k + " day" + (k === 1 ? "" : "s") + " (soon)"; cls = "status-soon"; }
+          else { status = "In " + k + " days"; }
+        } else { status = t.date_text || "Verify"; }
+        var tdLabel = el("td", {}, [el("strong", { text: t.label || "" })]);
+        if (t.status === "unverified") tdLabel.appendChild(el("div", {}, [el("span", { class: "badge warn", text: "Verify with the official page" })]));
+        if (t.note) { tdLabel.appendChild(el("div", { class: "small muted", text: t.note })); }
+        if (safeUrl(t.url)) tdLabel.appendChild(el("div", { class: "small" }, [link("Official page", t.url)]));
+        tb.appendChild(el("tr", {}, [
+          tdLabel,
+          el("td", { text: d ? (d2 ? fmtDate(d) + " to " + fmtDate(d2) : fmtDate(d)) : (t.date_text || "") }),
+          el("td", { class: cls, text: status })
+        ]));
+      });
+      n.appendChild(el("div", { class: "tablewrap" }, [el("table", {}, [
+        el("thead", {}, [el("tr", {}, [el("th", { text: "What" }), el("th", { text: "When" }), el("th", { text: "Status" })])]),
+        tb
+      ])]));
+    }
+
+    if ((GUIDE.rules || []).length) {
+      n.appendChild(el("h3", { text: "Rules that apply to you" }));
+      var rb = el("tbody");
+      GUIDE.rules.forEach(function (r) {
+        var td = el("td", { text: r.text || "" });
+        if (safeUrl(r.url)) td.appendChild(el("div", { class: "small" }, [link("Official page", r.url)]));
+        rb.appendChild(el("tr", {}, [el("td", {}, [el("strong", { text: r.label || "" })]), td]));
+      });
+      n.appendChild(el("div", { class: "tablewrap" }, [el("table", {}, [
+        el("thead", {}, [el("tr", {}, [el("th", { text: "Topic" }), el("th", { text: "Rule" })])]), rb
+      ])]));
+    }
+    addPanel("overview", "Overview", n);
+  })();
+
+  var KIND = { county_candidate_list: "County candidate list", state_candidate_list: "State candidate list", sample_ballot: "Official sample ballot", voter_sample_ballot: "Your sample ballot", voter_pamphlet: "Official voter pamphlet", measure_list: "Official measure list", official_other: "Official source", aggregator: "Nonpartisan aggregator", news: "News report" };
+  function completenessCard() {
+    var c = GUIDE.completeness;
+    if (!c) return null;
+    var exp = c.expected || [];
+    var inGuide = exp.filter(function (e) { return (e.type === "race" ? races : measures).some(function (x) { return x.id === e.id; }); }).length;
+    var unresolved = c.unresolved || [];
+    var ic = c.independent_check || {};
+    var box = el("div", { class: "callout", role: "note" });
+    box.appendChild(el("strong", { text: "How this list was checked" }));
+    box.appendChild(para("I built this list from official sources" + (c.checked_on ? " on " + c.checked_on : "") + " and checked it against the guide: " + inGuide + " of " + exp.length + " offices and measures in that inventory appear here. This is not a guarantee. Compare it with your own sample ballot.", "small"));
+    var ul = el("ul", { class: "plain small" });
+    (c.sources || []).forEach(function (sc) {
+      var u = safeUrl(sc.url);
+      ul.appendChild(el("li", {}, [u ? el("a", { href: u, target: "_blank", rel: "noopener noreferrer", text: sc.label || u }) : el("span", { text: sc.label || "Source" }), el("span", { class: "muted", text: " (" + (KIND[sc.kind] || sc.kind || "source") + (sc.retrieved ? ", " + sc.retrieved : "") + ")" })]));
+    });
+    box.appendChild(ul);
+    if (c.district_basis) box.appendChild(para("Districts: " + c.district_basis, "small"));
+    if (ic.done) box.appendChild(para("Independent re-check: done. A separate pass built its own list from the same sources without seeing this guide" + ((ic.discrepancies || []).length ? ", and " + ic.discrepancies.length + " difference" + (ic.discrepancies.length === 1 ? " was" : "s were") + " resolved." : ", with no differences found."), "small"));
+    else box.appendChild(el("p", { class: "small" }, [el("span", { class: "badge warn", text: "Not independently re-checked" }), " " + (ic.skipped_reason || "")]));
+    if (unresolved.length) {
+      var uu = el("ul", { class: "plain small" });
+      unresolved.forEach(function (u) { uu.appendChild(el("li", { text: (u.item || String(u)) + (u.reason ? ": " + u.reason : "") })); });
+      box.appendChild(el("p", { class: "small" }, [el("span", { class: "badge warn", text: unresolved.length + " not confirmed" }), " These are not in the guide yet:"]));
+      box.appendChild(uu);
+    }
+    return box;
+  }
+
+  // Ballot (compact list)
+  (function () {
+    if (!races.length && !measures.length) return;
+    var n = el("div");
+    n.appendChild(el("h2", { text: "Your ballot" }));
+    n.appendChild(para(races.length + " race" + (races.length === 1 ? "" : "s") + " and " + measures.length + " measure" + (measures.length === 1 ? "" : "s") + " found.", "muted"));
+    var ccard = completenessCard();
+    if (ccard) n.appendChild(ccard);
+    var levels = [];
+    races.concat(measures).forEach(function (x) { if (x.level && levels.indexOf(x.level) < 0) levels.push(x.level); });
+    levels.forEach(function (lv) {
+      n.appendChild(el("div", { class: "levelhead", text: lv }));
+      races.filter(function (r) { return r.level === lv; }).forEach(function (r) {
+        var cands = r.candidates || [];
+        var card = el("div", { class: "card" });
+        var head = el("div", { class: "row" }, [el("h3", { text: r.office || "Race" })]);
+        if (r.district) head.appendChild(el("span", { class: "muted", text: r.district }));
+        head.appendChild(el("span", { class: "badge", text: raceKind(r) }));
+        if (r.status === "unverified") head.appendChild(el("span", { class: "badge warn", text: "Unverified" }));
+        if ((r.vote_for || 1) > 1) head.appendChild(el("span", { class: "badge", text: "Vote for up to " + r.vote_for }));
+        if (r.method && r.method !== "plurality") head.appendChild(el("span", { class: "badge", text: "Method: " + r.method }));
+        card.appendChild(head);
+        if (r.key_dynamic) card.appendChild(para(r.key_dynamic, "small muted"));
+        if (cands.length) {
+          var ul = el("ul", { class: "plain" });
+          cands.forEach(function (c) {
+            ul.appendChild(el("li", { text: ticketName(c) + (c.party ? " (" + c.party + ")" : "") + (c.incumbent ? " – incumbent" : "") }));
+          });
+          card.appendChild(ul);
+        }
+        n.appendChild(card);
+      });
+      measures.filter(function (m) { return m.level === lv; }).forEach(function (m) {
+        var card = el("div", { class: "card" });
+        card.appendChild(el("div", { class: "row" }, [el("h3", { text: (m.number ? m.number + ": " : "") + (m.title || "Measure") }), el("span", { class: "badge", text: "Ballot measure" })]));
+        if (m.summary) card.appendChild(para(m.summary, "small muted"));
+        n.appendChild(card);
+      });
+    });
+    addPanel("ballot", "Ballot", n);
+  })();
+
+  // Priorities
+  (function () {
+    var p = GUIDE.profile;
+    if (!p) return;
+    var n = el("div");
+    n.appendChild(el("h2", { text: "Your priorities" }));
+    var rows = [];
+    function add(k, v) { if (v && (!Array.isArray(v) || v.length)) rows.push([k, v]); }
+    add("Where you vote", p.location);
+    add("Ballot", p.ballot_choice);
+    add("Biggest priorities (in order)", (p.top_issues || []).map(function (s, i) { return (i + 1) + ". " + s; }));
+    add("Your positions", (p.issue_positions || []).map(function (l) { return l.issue + ": " + l.position; }));
+    add("Also important to you", p.other_issues);
+    add("Candidate style", p.style);
+    add("Local issues", (p.local_positions || []).map(function (l) { return l.topic + ": " + l.position; }));
+    add("Dealbreakers", p.dealbreakers);
+    add("Notes", p.notes);
+    var tb = el("tbody");
+    rows.forEach(function (r) {
+      var td = el("td");
+      if (Array.isArray(r[1])) { var ul = el("ul", { class: "plain" }); r[1].forEach(function (x) { ul.appendChild(el("li", { text: x })); }); td.appendChild(ul); }
+      else td.textContent = r[1];
+      tb.appendChild(el("tr", {}, [el("td", {}, [el("strong", { text: r[0] })]), td]));
+    });
+    n.appendChild(el("div", { class: "tablewrap" }, [el("table", {}, [tb])]));
+    n.appendChild(para("Your biggest priorities carry the most weight, and the earlier in the list, the more it counts in a close call. Other issues you picked carry less. Dealbreakers are filters. If something here is wrong, tell Claude and the guide will be updated.", "small muted"));
+    addPanel("profile", "Your priorities", n);
+  })();
+
+  // Guide (full race cards)
+  var guideFilter = { level: "All", contested: false, q: "" };
+  function raceKind(r) {
+    var n = (r.candidates || []).length;
+    if (n > 1) return "Contested";
+    if (n === 1) return r.status === "verified" ? "Uncontested" : "One candidate found (unverified)";
+    return "No candidates found";
+  }
+  function recIds(r) { return (r.recommendation && r.recommendation.candidate_ids) || []; }
+  function raceCard(r) {
+    var cands = r.candidates || [];
+    var rec = r.recommendation || {};
+    var ids = recIds(r);
+    var card = el("article", { class: "card" });
+    card.dataset.level = r.level || "";
+    card.dataset.contested = cands.length > 1 ? "1" : "0";
+    card.dataset.search = ((r.office || "") + " " + (r.district || "") + " " + cands.map(function (c) { return c.name + " " + (c.running_mate || ""); }).join(" ")).toLowerCase();
+    var head = el("div", { class: "row" }, [el("h3", { text: r.office || "Race" })]);
+    if (r.district) head.appendChild(el("span", { class: "muted", text: r.district }));
+    head.appendChild(el("span", { class: "badge", text: r.level || "" }));
+    head.appendChild(el("span", { class: "badge", text: raceKind(r) }));
+    if (r.status === "unverified") head.appendChild(el("span", { class: "badge warn", text: "Unverified" }));
+    if ((r.vote_for || 1) > 1) head.appendChild(el("span", { class: "badge", text: "Vote for up to " + r.vote_for }));
+    card.appendChild(head);
+    if (r.key_dynamic) card.appendChild(para(r.key_dynamic));
+
+    var grid = el("div", { class: "grid" });
+    cands.forEach(function (c) {
+      var idx = ids.indexOf(c.id);
+      var cc = el("div", { class: "card" + (idx >= 0 ? " rec" : ""), style: "margin:0" });
+      var h = el("div", { class: "row" }, [el("h4", { text: displayName(c), style: "margin:0" })]);
+      if (c.party) h.appendChild(el("span", { class: "badge", text: c.party }));
+      if (c.incumbent) h.appendChild(el("span", { class: "badge", text: "Incumbent" }));
+      if (idx >= 0) h.appendChild(el("span", { class: "badge rec", text: ids.length > 1 && rec.tie !== true && (r.vote_for || 1) < 2 ? "Best fit: rank " + (idx + 1) : (rec.tie === true && ids.length > 1 ? "\u2605 Tied best fit" : "\u2605 Best fit to your priorities") }));
+      cc.appendChild(h);
+      if (c.running_mate) cc.appendChild(el("div", { class: "small" }, [el("strong", { text: "Running mate: " }), c.running_mate]));
+      if (c.summary) cc.appendChild(para(c.summary, "small"));
+      if (c.record_depth) cc.appendChild(el("div", { class: "row small" }, [el("span", { class: "badge" + (c.record_depth === "thin" ? " warn" : ""), text: DEPTH[c.record_depth] || c.record_depth }), c.record_depth === "thin" ? el("span", { class: "muted", text: "Research more before deciding." }) : null]));
+      if (c.fit && c.fit.overall) {
+        cc.appendChild(el("div", { class: "row", style: "margin-top:8px" }, [el("strong", { text: "Overall fit:" }), chip(c.fit.overall)]));
+        if (typeof c.fit.score === "number") cc.appendChild(scoreBlock(c.fit));
+        else if (typeof c.fit.coverage === "number") cc.appendChild(el("div", {}, [el("span", { class: "badge warn", text: "Evidence covers " + c.fit.coverage + "% of what matters here (limited)" })]));
+        if (c.fit.dealbreaker) cc.appendChild(el("div", { class: "callout small", role: "note", text: "Dealbreaker flag: " + c.fit.dealbreaker }));
+        var shown = (c.fit.by_issue || []).filter(function (b) { return b.rating !== "na"; });
+        if (shown.length) {
+          cc.appendChild(el("details", {}, [el("summary", { text: "Evidence by issue (" + shown.length + ")" }), issueBars(c.fit.by_issue)]));
+        }
+      }
+      if (c.best_case || c.strongest_criticism) {
+        var d = el("details", {}, [el("summary", { text: "Best case and strongest criticism" })]);
+        if (c.best_case) d.appendChild(el("p", {}, [el("strong", { text: "Best case: " }), c.best_case]));
+        if (c.strongest_criticism) d.appendChild(el("p", {}, [el("strong", { text: "Strongest criticism: " }), c.strongest_criticism]));
+        cc.appendChild(d);
+      }
+      if ((c.links || []).length) {
+        var lr = el("div", { class: "small row" });
+        c.links.forEach(function (l) { if (safeUrl(l.url)) lr.appendChild(link(l.label, l.url)); });
+        cc.appendChild(lr);
+      }
+      grid.appendChild(cc);
+    });
+    card.appendChild(grid);
+    if (cands.length > 1) { var cmpEl = compareBlock(cands); if (cmpEl) card.appendChild(cmpEl); }
+
+    if (rec && (rec.reasoning || ids.length || rec.none_reason)) {
+      var rb = el("div", { class: "callout", style: "margin-top:14px; border-left-color: var(--accent); background: var(--accent-soft)" });
+      var names = ids.map(function (id) { var f = cands.filter(function (c) { return c.id === id; })[0]; return f ? ticketName(f) : id; });
+      var unc = cands.length <= 1 && !ids.length;
+      var tied = rec.tie === true && ids.length > 1;
+      var multiSeat = (r.vote_for || 1) > 1;
+      var headline;
+      if (!ids.length) headline = unc ? "Uncontested: no recommendation needed" : "No clear best fit";
+      else if (tied) headline = (rec.decision === "toss_up" ? "Too close to call: " : "Tied best fit: ") + names.join(" and ");
+      else if (multiSeat) headline = "Best fit for your " + r.vote_for + " votes: " + names.join(", ");
+      else if (ids.length > 1) headline = "Best-fit ranking: " + names.join(", then ");
+      else if (rec.decision === "lean") headline = "Leaning toward " + names[0];
+      else if (rec.decision === "slight") headline = "Slight edge: " + names[0];
+      else headline = "Best fit to your priorities: " + names[0];
+      rb.appendChild(el("strong", { text: headline }));
+      if (rec.confidence && !unc) rb.appendChild(el("span", { class: "badge", style: "margin-left:8px", text: CONF[rec.confidence] || rec.confidence }));
+      if (typeof rec.margin === "number" && !unc && !multiSeat) rb.appendChild(para("Gap between the top two on your priorities: " + rec.margin + " points. " + (rec.robust ? "This holds up even if the unrated issues break the other way." : (rec.decision === "toss_up" ? "" : "The likely ranges overlap, so unrated issues could change this.")), "small muted"));
+      if (rec.reasoning) rb.appendChild(para(rec.reasoning));
+      if (!ids.length && rec.none_reason) rb.appendChild(para(rec.none_reason, "small muted"));
+      if (rec.caveats) rb.appendChild(el("p", { class: "small" }, [el("strong", { text: "Caveat: " }), rec.caveats]));
+      card.appendChild(rb);
+    }
+    if (r.more_research) card.appendChild(el("p", { class: "small" }, [el("strong", { text: "Worth a closer look: " }), r.more_research]));
+
+    // My pick: single (radio), vote for N (checkboxes limited to N), ranked methods (rank selectors)
+    var multi = (r.vote_for || 1) > 1, ranked = !multi && r.method && r.method !== "plurality";
+    var pick = el("div", { class: "pick no-print", role: "group", "aria-label": "Your pick for " + (r.office || "this race") });
+    pick.appendChild(el("strong", { text: multi ? "Your picks (up to " + r.vote_for + "): " : ranked ? "Your ranking: " : "Your pick: " }));
+    function objPicks() { var v = state.picks[r.id]; return (v && typeof v === "object" && !Array.isArray(v)) ? v : {}; }
+    if (multi) {
+      var cur = Array.isArray(state.picks[r.id]) ? state.picks[r.id] : [];
+      var boxes = [];
+      cands.forEach(function (c) {
+        var inp = el("input", { type: "checkbox", value: c.id });
+        inp.checked = cur.indexOf(c.id) >= 0;
+        boxes.push(inp);
+        inp.addEventListener("change", function () {
+          var chosen = boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; });
+          if (chosen.length > r.vote_for) { inp.checked = false; chosen = chosen.filter(function (v) { return v !== c.id; }); }
+          state.picks[r.id] = chosen; saveState(); renderCheat();
+        });
+        pick.appendChild(el("label", {}, [inp, el("span", { text: ticketName(c) })]));
+      });
+    } else if (ranked) {
+      var curR = objPicks();
+      cands.forEach(function (c) {
+        var sel = el("select", { "aria-label": "Rank for " + ticketName(c) });
+        sel.appendChild(el("option", { value: "", text: "Unranked" }));
+        for (var i = 1; i <= cands.length; i++) sel.appendChild(el("option", { value: String(i), text: String(i) }));
+        sel.value = curR[c.id] || "";
+        sel.addEventListener("change", function () {
+          var o = objPicks();
+          if (sel.value) o[c.id] = sel.value; else delete o[c.id];
+          state.picks[r.id] = o; saveState(); renderCheat();
+        });
+        pick.appendChild(el("label", {}, [el("span", { text: ticketName(c) }), sel]));
+      });
+    } else {
+      var opts = cands.map(function (c) { return { v: c.id, t: ticketName(c) }; }).concat([{ v: "__none", t: "No pick / skip" }]);
+      opts.forEach(function (o) {
+        var inp = el("input", { type: "radio", name: "pick-" + r.id, value: o.v });
+        if (state.picks[r.id] === o.v) inp.checked = true;
+        inp.addEventListener("change", function () { state.picks[r.id] = o.v; saveState(); renderCheat(); });
+        pick.appendChild(el("label", {}, [inp, el("span", { text: o.t })]));
+      });
+    }
+    card.appendChild(pick);
+
+    if ((r.sources || []).length) {
+      var sd = el("details", {}, [el("summary", { text: "Sources (" + r.sources.length + ")" })]);
+      var ul = el("ul", { class: "plain small" });
+      r.sources.forEach(function (s) { ul.appendChild(el("li", {}, [link(s.title, s.url), s.retrieved ? " (retrieved " + s.retrieved + ")" : ""])); });
+      sd.appendChild(ul);
+      card.appendChild(sd);
+    }
+    return card;
+  }
+  function measureCard(m) {
+    var card = el("article", { class: "card" });
+    card.dataset.level = m.level || "";
+    card.dataset.contested = "1";
+    card.dataset.search = ((m.number || "") + " " + (m.title || "")).toLowerCase();
+    card.appendChild(el("div", { class: "row" }, [el("h3", { text: (m.number ? m.number + ": " : "") + (m.title || "Measure") }), el("span", { class: "badge", text: m.level || "" }), el("span", { class: "badge", text: "Ballot measure" })]));
+    if (m.summary) card.appendChild(para(m.summary));
+    var g = el("div", { class: "grid" }, [
+      el("div", { class: "card", style: "margin:0" }, [el("h4", { text: "A YES vote means", style: "margin-top:0" }), para(m.yes_means || "Not found.")]),
+      el("div", { class: "card", style: "margin:0" }, [el("h4", { text: "A NO vote means", style: "margin-top:0" }), para(m.no_means || "Not found.")])
+    ]);
+    card.appendChild(g);
+    var facts = el("ul", { class: "plain small", style: "margin-top:10px" });
+    if (m.fiscal) facts.appendChild(el("li", {}, [el("strong", { text: "Fiscal effect: " }), m.fiscal]));
+    if ((m.supporters || []).length) facts.appendChild(el("li", {}, [el("strong", { text: "Supporters: " }), m.supporters.join("; ")]));
+    if ((m.opponents || []).length) facts.appendChild(el("li", {}, [el("strong", { text: "Opponents: " }), m.opponents.join("; ")]));
+    if (m.funding) facts.appendChild(el("li", {}, [el("strong", { text: "Funding: " }), m.funding]));
+    if (m.legal_status) facts.appendChild(el("li", {}, [el("strong", { text: "Legal status: " }), m.legal_status]));
+    card.appendChild(facts);
+    if ((m.by_issue || []).length) {
+      var tb = el("tbody");
+      m.by_issue.forEach(function (bi) {
+        tb.appendChild(el("tr", {}, [el("td", { text: bi.issue || "" }), el("td", {}, [chip(bi.yes_rating)]), el("td", {}, [chip(bi.no_rating)]), el("td", { text: bi.note || "" })]));
+      });
+      card.appendChild(el("div", { class: "tablewrap", style: "margin-top:8px" }, [el("table", {}, [
+        el("thead", {}, [el("tr", {}, [el("th", { text: "Your issue" }), el("th", { text: "Fit if YES" }), el("th", { text: "Fit if NO" }), el("th", { text: "Why" })])]), tb
+      ])]));
+    }
+    if (m.lean) {
+      var L = { yes: ["▲", "Lean YES"], no: ["▼", "Lean NO"], undecided: ["◆", "Undecided"] }[m.lean] || ["◆", "Undecided"];
+      var rb = el("div", { class: "callout", style: "margin-top:14px; border-left-color: var(--accent); background: var(--accent-soft)" });
+      rb.appendChild(el("strong", { text: L[0] + " " + L[1] }));
+      if (m.confidence) rb.appendChild(el("span", { class: "badge", style: "margin-left:8px", text: CONF[m.confidence] || m.confidence }));
+      if (typeof m.yes_score === "number" && typeof m.no_score === "number") {
+        var mbox = el("div", { class: "hb hb-score" });
+        [["YES", m.yes_score, m.yes_range], ["NO", m.no_score, m.no_range]].forEach(function (x) {
+          var tr = el("span", { class: "hb-track", "aria-hidden": "true" });
+          if (x[2] && x[2][1] > x[2][0]) tr.appendChild(el("span", { class: "hb-band", style: "left:" + x[2][0] + "%; width:" + (x[2][1] - x[2][0]) + "%" }));
+          tr.appendChild(el("span", { class: "hb-mark", style: "left:" + x[1] + "%" }));
+          mbox.appendChild(el("div", { class: "hb-line", style: "grid-template-columns: 90px minmax(0,1fr) auto" }, [el("span", { class: "hb-who", text: "Fit if " + x[0] }), tr, el("strong", { class: "small", text: x[1] + " / 100" })]));
+        });
+        rb.appendChild(mbox);
+        if (typeof m.coverage === "number") rb.appendChild(para("Evidence covers " + m.coverage + "% of what matters here." + (m.robust === false && m.decision !== "toss_up" ? " The likely ranges overlap, so unrated issues could change this." : ""), "small muted"));
+      }
+      if (m.reasoning) rb.appendChild(para(m.reasoning));
+      if (m.caveats) rb.appendChild(el("p", { class: "small" }, [el("strong", { text: "Caveat: " }), m.caveats]));
+      card.appendChild(rb);
+    }
+    var pick = el("div", { class: "pick no-print", role: "radiogroup", "aria-label": "Your choice for " + (m.title || "this measure") });
+    pick.appendChild(el("strong", { text: "Your choice: " }));
+    [["yes", "YES"], ["no", "NO"], ["skip", "Skip"]].forEach(function (o) {
+      var inp = el("input", { type: "radio", name: "pick-" + m.id, value: o[0] });
+      if (state.picks[m.id] === o[0]) inp.checked = true;
+      inp.addEventListener("change", function () { state.picks[m.id] = o[0]; saveState(); renderCheat(); });
+      pick.appendChild(el("label", {}, [inp, el("span", { text: o[1] })]));
+    });
+    card.appendChild(pick);
+    if ((m.sources || []).length) {
+      var sd = el("details", {}, [el("summary", { text: "Sources (" + m.sources.length + ")" })]);
+      var ul = el("ul", { class: "plain small" });
+      m.sources.forEach(function (s) { ul.appendChild(el("li", {}, [link(s.title, s.url), s.retrieved ? " (retrieved " + s.retrieved + ")" : ""])); });
+      sd.appendChild(ul);
+      card.appendChild(sd);
+    }
+    return card;
+  }
+
+  var guideList;
+  function applyGuideFilter() {
+    if (!guideList) return;
+    var shown = 0;
+    Array.prototype.forEach.call(guideList.querySelectorAll("article.card"), function (c) {
+      var ok = (guideFilter.level === "All" || c.dataset.level === guideFilter.level) &&
+               (!guideFilter.contested || c.dataset.contested === "1") &&
+               (!guideFilter.q || c.dataset.search.indexOf(guideFilter.q) >= 0);
+      c.hidden = !ok;
+      if (ok) shown++;
+    });
+    var em = document.getElementById("g-empty");
+    if (em) em.hidden = shown > 0;
+  }
+  function buildFilterBar(host, levels) {
+    var bar = el("div", { class: "filters", role: "group", "aria-label": "Filter races" });
+    ["All"].concat(levels).forEach(function (lv) {
+      var b = el("button", { type: "button", "aria-pressed": lv === guideFilter.level ? "true" : "false", text: lv });
+      b.addEventListener("click", function () {
+        guideFilter.level = lv;
+        Array.prototype.forEach.call(bar.querySelectorAll("button[data-level]"), function (x) { x.setAttribute("aria-pressed", x.dataset.level === lv ? "true" : "false"); });
+        applyGuideFilter();
+      });
+      b.dataset.level = lv;
+      bar.appendChild(b);
+    });
+    var tg = el("button", { type: "button", "aria-pressed": "false", text: "Contested only" });
+    tg.addEventListener("click", function () { guideFilter.contested = !guideFilter.contested; tg.setAttribute("aria-pressed", guideFilter.contested ? "true" : "false"); applyGuideFilter(); });
+    bar.appendChild(tg);
+    var s = el("input", { type: "search", placeholder: "Search races or names", "aria-label": "Search races or names" });
+    s.addEventListener("input", function () { guideFilter.q = s.value.trim().toLowerCase(); applyGuideFilter(); });
+    bar.appendChild(s);
+    host.appendChild(bar);
+  }
+
+  (function () {
+    if (!races.length || !hasFit()) return;
+    var n = el("div");
+    n.appendChild(el("h2", { text: "Your voter guide" }));
+    n.appendChild(el("p", { class: "muted small", text: "How each option fits the priorities you gave. Look for the text label and symbol, not color: ✓✓ Strong fit, ✓ Good fit, ~ Mixed, ✗ Weak fit, ✗✗ Poor fit, ? Not enough info, – Not applicable. Longer bars mean closer to your priorities. The alignment score (0 to 100) is a weighted summary of those ratings, shown with a likely range because unrated issues could move it. It measures fit to your priorities, not who will win." }));
+    var levels = [];
+    races.forEach(function (r) { if (r.level && levels.indexOf(r.level) < 0) levels.push(r.level); });
+    buildFilterBar(n, levels);
+    guideList = el("div");
+    levels.forEach(function (lv) {
+      races.filter(function (r) { return r.level === lv; }).forEach(function (r) { guideList.appendChild(raceCard(r)); });
+    });
+    n.appendChild(guideList);
+    n.appendChild(el("div", { id: "g-empty", class: "empty", hidden: true, text: "No races match this filter." }));
+    addPanel("guide", "Guide", n);
+  })();
+
+  // Measures
+  (function () {
+    if (!measures.length || !hasFit()) return;
+    var n = el("div");
+    n.appendChild(el("h2", { text: "Ballot measures" }));
+    n.appendChild(para("Plain-language meaning of each vote, effects on your priorities, and a lean. A lean is a reading of the evidence against your priorities, not a recommendation to vote a certain way.", "muted small"));
+    measures.forEach(function (m) { n.appendChild(measureCard(m)); });
+    addPanel("measures", "Measures", n);
+  })();
+
+  // Cheat sheet
+  var cheatHost = el("div", { id: "cheat-host" });
+  function renderCheat() {
+    cheatHost.textContent = "";
+    cheatHost.appendChild(el("h2", { text: "Ballot cheat sheet" }));
+    cheatHost.appendChild(el("p", { class: "small muted", text: (meta.election_name || "") + " · " + (meta.jurisdiction || "") + ". Check each line against your actual ballot" + (GUIDE.completeness ? " (list built from " + (GUIDE.completeness.sources || []).length + " official source" + ((GUIDE.completeness.sources || []).length === 1 ? "" : "s") + (GUIDE.completeness.checked_on ? " on " + GUIDE.completeness.checked_on : "") + ((GUIDE.completeness.unresolved || []).length ? "; " + GUIDE.completeness.unresolved.length + " item(s) not confirmed" : "") + ")" : "") + ". “Best fit” is what the evidence suggests for your priorities; “My pick” is your own decision." }));
+    var tb = el("tbody");
+    races.forEach(function (r) {
+      var cands = r.candidates || [], ids = recIds(r);
+      var fitNames = ids.map(function (id) { var f = cands.filter(function (c) { return c.id === id; })[0]; return f ? ticketName(f) : id; });
+      var mine = state.picks[r.id];
+      function nm(id) { var f = cands.filter(function (c) { return c.id === id; })[0]; return f ? ticketName(f) : id; }
+      var mineName = "";
+      if (Array.isArray(mine)) mineName = mine.map(nm).join(", ");
+      else if (mine && typeof mine === "object") mineName = Object.keys(mine).sort(function (x, y) { return mine[x] - mine[y]; }).map(function (id) { return mine[id] + ". " + nm(id); }).join("; ");
+      else if (mine) mineName = mine === "__none" ? "No pick / skip" : nm(mine);
+      var conf = cands.length > 1 && r.recommendation && r.recommendation.confidence ? CONF[r.recommendation.confidence] : "";
+      var chk = el("input", { type: "checkbox", "aria-label": "Marked " + (r.office || "race") + " on my ballot" });
+      chk.checked = !!state.done[r.id];
+      chk.addEventListener("change", function () { state.done[r.id] = chk.checked; saveState(); });
+      tb.appendChild(el("tr", {}, [
+        el("td", {}, [el("strong", { text: r.office || "" }), r.district ? el("div", { class: "small muted", text: r.district }) : null]),
+        el("td", { text: (function () {
+          var rc = r.recommendation || {};
+          if (!fitNames.length) return cands.length > 1 ? "No evidence-based pick" : raceKind(r);
+          var pre = rc.decision === "toss_up" ? "Too close to call: " : (rc.tie === true ? "Tied: " : ((rc.decision === "lean" || rc.decision === "slight") ? DECISION[rc.decision] + ": " : ""));
+          var body = rc.tie === true ? fitNames.join(" / ") : fitNames.join((r.vote_for || 1) > 1 ? ", " : " → ");
+          var sc = typeof rc.top_score === "number" && !((r.vote_for || 1) > 1) ? " (" + rc.top_score + "/100)" : "";
+          return pre + body + sc;
+        })() }),
+        el("td", { text: conf }),
+        el("td", { text: mineName || "—" }),
+        el("td", { class: "no-print" }, [chk])
+      ]));
+    });
+    measures.forEach(function (m) {
+      var lean = { yes: "▲ Lean YES", no: "▼ Lean NO", undecided: "◆ Undecided" }[m.lean] || "";
+      var mine = state.picks[m.id];
+      var chk = el("input", { type: "checkbox", "aria-label": "Marked " + (m.title || "measure") + " on my ballot" });
+      chk.checked = !!state.done[m.id];
+      chk.addEventListener("change", function () { state.done[m.id] = chk.checked; saveState(); });
+      tb.appendChild(el("tr", {}, [
+        el("td", {}, [el("strong", { text: (m.number ? m.number + ": " : "") + (m.title || "Measure") })]),
+        el("td", { text: lean }),
+        el("td", { text: m.confidence ? CONF[m.confidence] : "" }),
+        el("td", { text: mine ? mine.toUpperCase() : "—" }),
+        el("td", { class: "no-print" }, [chk])
+      ]));
+    });
+    cheatHost.appendChild(el("div", { class: "tablewrap" }, [el("table", {}, [
+      el("thead", {}, [el("tr", {}, [el("th", { text: "Race or measure" }), el("th", { text: "Best fit to your priorities" }), el("th", { text: "Confidence" }), el("th", { text: "My pick" }), el("th", { class: "no-print", text: "Marked" })])]), tb
+    ])]));
+    var pb = el("button", { type: "button", class: "btn no-print", style: "margin-top:14px", text: "Print this cheat sheet" });
+    pb.addEventListener("click", function () {
+      document.body.classList.add("print-cheat");
+      window.print();
+      setTimeout(function () { document.body.classList.remove("print-cheat"); }, 500);
+    });
+    cheatHost.appendChild(pb);
+    cheatHost.appendChild(para("Your picks and check marks are saved only in this browser.", "small muted no-print"));
+  }
+  if ((races.length || measures.length) && hasFit()) { renderCheat(); addPanel("cheat", "Cheat sheet", cheatHost); }
+
+  // Sources
+  (function () {
+    var n = el("div");
+    n.appendChild(el("h2", { text: "Sources and method" }));
+    n.appendChild(para(GUIDE.method_notes || "Fit ratings compare each candidate or measure to the priorities you gave, using public records and sourced statements. Each issue is rated Strong fit, Good fit, Mixed, Weak fit or Poor fit (or Not enough info). The alignment score counts those as 100%, 75%, 50%, 25% and 0% of each issue's weight (your #1 priority weighs 5, #2 weighs 4, other priorities 3, other issues 1). Statements and party platforms count at most as Good fit, and party-platform evidence counts at half weight. Issues with no evidence are left out of the score and lower the evidence-coverage figure; the likely range assumes each unrated issue lands somewhere between Weak fit and Good fit. The gap between the top two sets the label: 15+ points is a clear best fit (only if the ranges do not overlap), 8 to 14 leaning, 3 to 7 a slight edge, under 3 too close to call. Thin evidence lowers the label. These are not endorsements or predictions."));
+    var all = [];
+    (GUIDE.sources || []).forEach(function (s) { all.push({ group: "General", s: s }); });
+    races.forEach(function (r) { (r.sources || []).forEach(function (s) { all.push({ group: r.office || "Race", s: s }); }); });
+    measures.forEach(function (m) { (m.sources || []).forEach(function (s) { all.push({ group: (m.number || "") + " " + (m.title || "Measure"), s: s }); }); });
+    if (all.length) {
+      var tb = el("tbody");
+      all.forEach(function (x) { tb.appendChild(el("tr", {}, [el("td", { text: x.group }), el("td", {}, [link(x.s.title, x.s.url)]), el("td", { text: x.s.retrieved || "" })])); });
+      n.appendChild(el("div", { class: "tablewrap" }, [el("table", {}, [
+        el("thead", {}, [el("tr", {}, [el("th", { text: "Used for" }), el("th", { text: "Source" }), el("th", { text: "Retrieved" })])]), tb
+      ])]));
+    } else n.appendChild(el("div", { class: "empty", text: "No sources recorded yet." }));
+    addPanel("sources", "Sources", n);
+  })();
+
+  // ---------- Tabs ----------
+  var tabs = document.getElementById("g-tabs"), host = document.getElementById("g-panels");
+  var startId = meta.default_tab && panels.some(function (p) { return p.id === meta.default_tab; }) ? meta.default_tab : panels[0].id;
+  function select(id, focus) {
+    panels.forEach(function (p) {
+      var on = p.id === id;
+      p.btn.setAttribute("aria-selected", on ? "true" : "false");
+      p.btn.tabIndex = on ? 0 : -1;
+      p.sec.hidden = !on;
+      if (on && focus) p.btn.focus();
+    });
+  }
+  panels.forEach(function (p, i) {
+    p.btn = el("button", { type: "button", role: "tab", id: "tab-" + p.id, "aria-controls": "panel-" + p.id, text: p.label });
+    p.sec = el("section", { class: "panel", id: "panel-" + p.id, role: "tabpanel", "aria-labelledby": "tab-" + p.id }, [p.node]);
+    p.btn.addEventListener("click", function () { select(p.id, false); });
+    p.btn.addEventListener("keydown", function (ev) {
+      var k = ev.key, j = -1;
+      if (k === "ArrowRight") j = (i + 1) % panels.length;
+      else if (k === "ArrowLeft") j = (i - 1 + panels.length) % panels.length;
+      else if (k === "Home") j = 0;
+      else if (k === "End") j = panels.length - 1;
+      if (j >= 0) { ev.preventDefault(); select(panels[j].id, true); }
+    });
+    tabs.appendChild(p.btn);
+    host.appendChild(p.sec);
+  });
+  select(startId, false);
+  applyGuideFilter();
+})();
+</script>
+</body>
+</html>

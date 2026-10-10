@@ -1,0 +1,949 @@
+{
+  "meta": {
+    "title": "Voter Guide Sample",
+    "election_name": "Sample General Election",
+    "election_date": "2026-11-03",
+    "jurisdiction": "Sample Valley, Example County (fictional)",
+    "generated": "2026-10-08",
+    "stage": "guide",
+    "default_tab": "guide",
+    "is_sample": true
+  },
+  "election": {
+    "type": "general",
+    "type_label": "General election (plurality)",
+    "summary": "A general election with federal, state, county, and local races plus two ballot measures. This is fictional sample data used to test the template and show the data shape.",
+    "system_notes": [
+      "Vote for one candidate per race unless the race says otherwise.",
+      "Leaving a race blank does not invalidate the rest of your ballot (verify the local rule)."
+    ]
+  },
+  "timeline": [
+    {
+      "label": "Voter registration deadline",
+      "date": "2026-10-19",
+      "note": "Online and by mail. Check the official page for in-person and same-day options.",
+      "url": "https://example.org/register"
+    },
+    {
+      "label": "Early voting",
+      "date": "2026-10-20",
+      "note": "Weekdays, 8 a.m. to 5 p.m. at county offices.",
+      "url": "https://example.org/early",
+      "end_date": "2026-10-31",
+      "kind": "window"
+    },
+    {
+      "label": "Mail ballot request deadline",
+      "date": "2026-10-27",
+      "note": "Request in writing or online.",
+      "url": "https://example.org/mail"
+    },
+    {
+      "label": "Election Day",
+      "date": "2026-11-03",
+      "note": "Polls open 7 a.m. to 7 p.m.",
+      "url": "https://example.org/election-day"
+    },
+    {
+      "label": "Possible runoff",
+      "date": "2026-12-01",
+      "note": "Only if no candidate wins a majority in the marked race.",
+      "url": ""
+    },
+    {
+      "label": "Mail ballot postmark/return check",
+      "date_text": "Verify with county",
+      "status": "unverified",
+      "note": "Sample of an item that could not be confirmed from an official page.",
+      "url": ""
+    }
+  ],
+  "rules": [
+    {
+      "label": "ID to bring",
+      "text": "Photo ID or an accepted alternative (sample rule). Verify before you go.",
+      "url": "https://example.org/id"
+    },
+    {
+      "label": "Mail ballot return",
+      "text": "Must be received by Election Day (sample rule).",
+      "url": "https://example.org/mail-return"
+    },
+    {
+      "label": "Primary type",
+      "text": "Not applicable to this election.",
+      "url": ""
+    }
+  ],
+  "profile": {
+    "location": "Sample Valley, ZIP 00000",
+    "ballot_choice": "General election: all candidates evaluated on equal footing",
+    "top_issues": [
+      "Housing affordability",
+      "Economy and cost of living",
+      "Crime and public safety"
+    ],
+    "other_issues": [
+      "Education and public schools",
+      "Infrastructure",
+      "Public transportation",
+      "Water supply and drought"
+    ],
+    "style": "Pragmatic centrist",
+    "local_positions": [
+      {
+        "topic": "Downtown zoning change",
+        "position": "Allow more housing near transit, with design standards"
+      }
+    ],
+    "dealbreakers": [
+      "Candidates who oppose funding for local water infrastructure"
+    ],
+    "notes": "Prefers candidates with a track record of delivering results over rhetoric.",
+    "issue_positions": [
+      {
+        "issue": "Housing affordability",
+        "position": "Wants more housing built near jobs and transit, with some design standards"
+      },
+      {
+        "issue": "Economy and cost of living",
+        "position": "Prefers targeted small-business support over broad tax changes"
+      },
+      {
+        "issue": "Crime and public safety",
+        "position": "Wants a mix of community policing and jail oversight"
+      },
+      {
+        "issue": "Infrastructure",
+        "position": "Prefers steady maintenance funding over big new projects"
+      }
+    ]
+  },
+  "races": [
+    {
+      "id": "r-house",
+      "level": "Federal",
+      "office": "U.S. House of Representatives",
+      "district": "District 99 (sample)",
+      "vote_for": 1,
+      "method": "plurality",
+      "status": "verified",
+      "key_dynamic": "An open seat after the incumbent's retirement. The two main candidates differ most on housing supply and federal spending.",
+      "candidates": [
+        {
+          "id": "c-avery",
+          "name": "Avery Example",
+          "party": "Party A",
+          "incumbent": false,
+          "summary": "Former city planner and two-term city council member.",
+          "record_depth": "deep",
+          "best_case": "Supporters point to council votes that expanded housing near transit and a record of passing budgets on time.",
+          "strongest_criticism": "Critics argue the council's housing policy raised permit costs for small builders in some neighborhoods.",
+          "fit": {
+            "overall": "strong",
+            "by_issue": [
+              {
+                "issue": "Housing affordability",
+                "rating": "strong",
+                "basis": "record",
+                "note": "Voted for the 2023 transit-area zoning change (council minutes)."
+              },
+              {
+                "issue": "Economy and cost of living",
+                "rating": "good",
+                "basis": "statement",
+                "note": "Campaign plan emphasizes small-business credits; no federal record yet."
+              },
+              {
+                "issue": "Crime and public safety",
+                "rating": "unknown",
+                "basis": "statement",
+                "note": "No specific positions found in public sources."
+              },
+              {
+                "issue": "Infrastructure",
+                "rating": "mixed",
+                "note": "Sample note: voted for the last transportation bill, with mixed results on local projects.",
+                "basis": "record"
+              },
+              {
+                "issue": "Public transportation",
+                "rating": "unknown",
+                "note": "Sample note: no clear record found on transit funding.",
+                "basis": "statement"
+              },
+              {
+                "issue": "Water supply and drought",
+                "rating": "good",
+                "note": "Sample note: supports storage projects but has not voted on them.",
+                "basis": "statement"
+              },
+              {
+                "issue": "Education and public schools",
+                "rating": "na",
+                "note": "Sample note: this office has little role in local school policy.",
+                "basis": "statement"
+              }
+            ],
+            "dealbreaker": ""
+          },
+          "links": [
+            {
+              "label": "Campaign site",
+              "url": "https://example.org/avery"
+            }
+          ]
+        },
+        {
+          "id": "c-blake",
+          "name": "Blake Sample",
+          "party": "Party B",
+          "incumbent": false,
+          "summary": "Small-business owner and chamber of commerce board member.",
+          "record_depth": "thin",
+          "best_case": "Supporters say Blake's business experience would bring practical budgeting to Congress.",
+          "strongest_criticism": "Critics note Blake has never held office, so there is little public record to evaluate.",
+          "fit": {
+            "overall": "mixed",
+            "by_issue": [
+              {
+                "issue": "Housing affordability",
+                "rating": "good",
+                "basis": "statement",
+                "note": "Supports faster permitting; opposes some zoning changes (questionnaire)."
+              },
+              {
+                "issue": "Economy and cost of living",
+                "rating": "good",
+                "basis": "statement",
+                "note": "Detailed tax and regulation plan, but statements only; no record in office."
+              },
+              {
+                "issue": "Crime and public safety",
+                "rating": "unknown",
+                "basis": "statement",
+                "note": "No positions found."
+              },
+              {
+                "issue": "Infrastructure",
+                "rating": "mixed",
+                "note": "Sample note: voted for the last transportation bill, with mixed results on local projects.",
+                "basis": "record"
+              },
+              {
+                "issue": "Public transportation",
+                "rating": "unknown",
+                "note": "Sample note: no clear record found on transit funding.",
+                "basis": "statement"
+              },
+              {
+                "issue": "Water supply and drought",
+                "rating": "good",
+                "note": "Sample note: supports storage projects but has not voted on them.",
+                "basis": "statement"
+              },
+              {
+                "issue": "Education and public schools",
+                "rating": "na",
+                "note": "Sample note: this office has little role in local school policy.",
+                "basis": "statement"
+              }
+            ],
+            "dealbreaker": ""
+          },
+          "links": [
+            {
+              "label": "Candidate questionnaire",
+              "url": "https://example.org/blake-q"
+            }
+          ]
+        }
+      ],
+      "recommendation": {
+        "candidate_ids": [
+          "c-avery"
+        ],
+        "reasoning": "Avery's documented housing votes align with your top priority, while Blake's economic plan is strong but rests on statements only.",
+        "confidence": "medium",
+        "caveats": "Neither candidate has stated positions on public safety. Blake's thin record limits how far this comparison can go.",
+        "none_reason": ""
+      },
+      "more_research": "Watch for candidate debates this month; check each candidate's public-safety plan.",
+      "sources": [
+        {
+          "title": "County election office: official candidate list",
+          "url": "https://example.org/candidates",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "title": "City council minutes, 2023 zoning vote",
+          "url": "https://example.org/minutes",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "r-gov",
+      "level": "State",
+      "office": "Governor and Lieutenant Governor",
+      "district": "Statewide (sample)",
+      "method": "plurality",
+      "status": "verified",
+      "key_dynamic": "Sample: candidates run as a ticket, so the Lieutenant Governor candidate is listed as a running mate.",
+      "candidates": [
+        {
+          "id": "c-morgan",
+          "name": "Morgan Placeholder",
+          "party": "Party A",
+          "incumbent": false,
+          "summary": "Former city planner and two-term city council member.",
+          "record_depth": "deep",
+          "best_case": "Supporters point to council votes that expanded housing near transit and a record of passing budgets on time.",
+          "strongest_criticism": "Critics argue the council's housing policy raised permit costs for small builders in some neighborhoods.",
+          "fit": {
+            "overall": "strong",
+            "by_issue": [
+              {
+                "issue": "Housing affordability",
+                "rating": "strong",
+                "basis": "record",
+                "note": "Voted for the 2023 transit-area zoning change (council minutes)."
+              },
+              {
+                "issue": "Economy and cost of living",
+                "rating": "good",
+                "basis": "statement",
+                "note": "Campaign plan emphasizes small-business credits; no federal record yet."
+              },
+              {
+                "issue": "Crime and public safety",
+                "rating": "unknown",
+                "basis": "statement",
+                "note": "No specific positions found in public sources."
+              },
+              {
+                "issue": "Infrastructure",
+                "rating": "mixed",
+                "note": "Sample note: voted for the last transportation bill, with mixed results on local projects.",
+                "basis": "record"
+              },
+              {
+                "issue": "Public transportation",
+                "rating": "unknown",
+                "note": "Sample note: no clear record found on transit funding.",
+                "basis": "statement"
+              },
+              {
+                "issue": "Water supply and drought",
+                "rating": "good",
+                "note": "Sample note: supports storage projects but has not voted on them.",
+                "basis": "statement"
+              },
+              {
+                "issue": "Education and public schools",
+                "rating": "na",
+                "note": "Sample note: this office has little role in local school policy.",
+                "basis": "statement"
+              }
+            ],
+            "dealbreaker": ""
+          },
+          "links": [
+            {
+              "label": "Campaign site",
+              "url": "https://example.org/avery"
+            }
+          ],
+          "running_mate": "Riley Fictional"
+        },
+        {
+          "id": "c-quinn",
+          "name": "Quinn Example",
+          "party": "Party B",
+          "incumbent": false,
+          "summary": "Small-business owner and chamber of commerce board member.",
+          "record_depth": "thin",
+          "best_case": "Supporters say Blake's business experience would bring practical budgeting to Congress.",
+          "strongest_criticism": "Critics note Blake has never held office, so there is little public record to evaluate.",
+          "fit": {
+            "overall": "mixed",
+            "by_issue": [
+              {
+                "issue": "Housing affordability",
+                "rating": "good",
+                "basis": "statement",
+                "note": "Supports faster permitting; opposes some zoning changes (questionnaire)."
+              },
+              {
+                "issue": "Economy and cost of living",
+                "rating": "good",
+                "basis": "statement",
+                "note": "Detailed tax and regulation plan, but statements only; no record in office."
+              },
+              {
+                "issue": "Crime and public safety",
+                "rating": "unknown",
+                "basis": "statement",
+                "note": "No positions found."
+              },
+              {
+                "issue": "Infrastructure",
+                "rating": "mixed",
+                "note": "Sample note: voted for the last transportation bill, with mixed results on local projects.",
+                "basis": "record"
+              },
+              {
+                "issue": "Public transportation",
+                "rating": "unknown",
+                "note": "Sample note: no clear record found on transit funding.",
+                "basis": "statement"
+              },
+              {
+                "issue": "Water supply and drought",
+                "rating": "good",
+                "note": "Sample note: supports storage projects but has not voted on them.",
+                "basis": "statement"
+              },
+              {
+                "issue": "Education and public schools",
+                "rating": "na",
+                "note": "Sample note: this office has little role in local school policy.",
+                "basis": "statement"
+              }
+            ],
+            "dealbreaker": ""
+          },
+          "links": [
+            {
+              "label": "Candidate questionnaire",
+              "url": "https://example.org/blake-q"
+            }
+          ],
+          "running_mate": "Sam Sample"
+        }
+      ],
+      "recommendation": {
+        "candidate_ids": [
+          "c-morgan"
+        ],
+        "reasoning": "Avery's documented housing votes align with your top priority, while Blake's economic plan is strong but rests on statements only.",
+        "confidence": "medium",
+        "caveats": "Neither candidate has stated positions on public safety. Blake's thin record limits how far this comparison can go.",
+        "none_reason": ""
+      },
+      "more_research": "Watch for candidate debates this month; check each candidate's public-safety plan.",
+      "sources": [
+        {
+          "title": "County election office: official candidate list",
+          "url": "https://example.org/candidates",
+          "retrieved": "2026-10-08"
+        },
+        {
+          "title": "City council minutes, 2023 zoning vote",
+          "url": "https://example.org/minutes",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "r-sheriff",
+      "level": "County",
+      "office": "County Sheriff",
+      "district": "Countywide",
+      "vote_for": 1,
+      "method": "plurality",
+      "status": "verified",
+      "key_dynamic": "A challenger is running against a long-serving incumbent on jail conditions and response times.",
+      "candidates": [
+        {
+          "id": "c-casey",
+          "name": "Casey Placeholder",
+          "party": "Nonpartisan",
+          "incumbent": true,
+          "summary": "Sheriff since 2014; former deputy.",
+          "record_depth": "deep",
+          "best_case": "Supporters credit the office with lower average response times since 2020 (county report).",
+          "strongest_criticism": "Critics cite two inspection reports noting overcrowding in the county jail.",
+          "fit": {
+            "overall": "good",
+            "by_issue": [
+              {
+                "issue": "Crime and public safety",
+                "rating": "good",
+                "basis": "record",
+                "note": "Response times improved; jail inspection issues remain."
+              },
+              {
+                "issue": "Housing affordability",
+                "rating": "na",
+                "basis": "statement",
+                "note": "Not an issue this office controls."
+              },
+              {
+                "issue": "Economy and cost of living",
+                "rating": "na",
+                "basis": "statement",
+                "note": "Not an issue this office controls."
+              }
+            ],
+            "dealbreaker": ""
+          },
+          "links": []
+        },
+        {
+          "id": "c-drew",
+          "name": "Drew Fictional",
+          "party": "Nonpartisan",
+          "incumbent": false,
+          "summary": "Retired police captain from a neighboring county.",
+          "record_depth": "moderate",
+          "best_case": "Supporters highlight Drew's work expanding community policing in a neighboring county.",
+          "strongest_criticism": "Critics question whether a change in leadership would disrupt ongoing jail-reform projects.",
+          "fit": {
+            "overall": "good",
+            "by_issue": [
+              {
+                "issue": "Crime and public safety",
+                "rating": "good",
+                "basis": "statement",
+                "note": "Detailed plan on jail staffing; no record in this county."
+              },
+              {
+                "issue": "Housing affordability",
+                "rating": "na",
+                "basis": "statement",
+                "note": "Not an issue this office controls."
+              },
+              {
+                "issue": "Economy and cost of living",
+                "rating": "na",
+                "basis": "statement",
+                "note": "Not an issue this office controls."
+              }
+            ],
+            "dealbreaker": ""
+          },
+          "links": []
+        }
+      ],
+      "recommendation": {
+        "candidate_ids": [
+          "c-casey",
+          "c-drew"
+        ],
+        "reasoning": "Both candidates rate Moderate on public safety with different kinds of evidence. This is a close call that depends on whether you value a proven record or a new plan.",
+        "confidence": "low",
+        "caveats": "Only public safety is relevant to this office among your priorities.",
+        "tie": true
+      },
+      "more_research": "Read the latest jail inspection report and each candidate's published plan.",
+      "sources": [
+        {
+          "title": "County sheriff race: official candidate list",
+          "url": "https://example.org/sheriff",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "r-assessor",
+      "level": "County",
+      "office": "County Assessor",
+      "district": "Countywide",
+      "vote_for": 1,
+      "method": "plurality",
+      "status": "verified",
+      "key_dynamic": "Uncontested: one candidate is on the ballot (write-ins allowed).",
+      "candidates": [
+        {
+          "id": "c-ellis",
+          "name": "Ellis Demo",
+          "party": "Nonpartisan",
+          "incumbent": true,
+          "summary": "Assessor since 2018; certified appraiser.",
+          "record_depth": "moderate",
+          "best_case": "Supporters note on-time completion of annual assessment rolls.",
+          "strongest_criticism": "No substantial criticism found in public sources.",
+          "links": []
+        }
+      ],
+      "recommendation": {
+        "candidate_ids": [],
+        "reasoning": "Uncontested. None of your priorities map to this office.",
+        "confidence": "high",
+        "caveats": "",
+        "none_reason": "Uncontested race; no recommendation needed."
+      },
+      "more_research": "",
+      "sources": [
+        {
+          "title": "County election office: official candidate list",
+          "url": "https://example.org/candidates",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "r-school",
+      "level": "Local",
+      "office": "School Board",
+      "district": "Sample Valley Unified (at large)",
+      "vote_for": 2,
+      "method": "plurality",
+      "status": "verified",
+      "key_dynamic": "Two seats open; the board is deciding on a school bond and class-size policy.",
+      "candidates": [
+        {
+          "id": "c-fran",
+          "name": "Fran Illustrative",
+          "party": "Nonpartisan",
+          "incumbent": true,
+          "summary": "Board member since 2020; former teacher.",
+          "record_depth": "deep",
+          "best_case": "Supporters credit Fran with restoring after-school programs in 2022 board votes.",
+          "strongest_criticism": "Critics note Fran voted against the 2024 teacher pay schedule.",
+          "fit": {
+            "overall": "mixed",
+            "by_issue": [
+              {
+                "issue": "Housing affordability",
+                "rating": "na",
+                "basis": "statement",
+                "note": "Not an issue this office controls."
+              },
+              {
+                "issue": "Economy and cost of living",
+                "rating": "na",
+                "basis": "statement",
+                "note": "Not an issue this office controls."
+              },
+              {
+                "issue": "Crime and public safety",
+                "rating": "mixed",
+                "basis": "record",
+                "note": "Voted for campus safety staffing in 2023."
+              }
+            ],
+            "dealbreaker": ""
+          },
+          "links": []
+        },
+        {
+          "id": "c-gale",
+          "name": "Gale Specimen",
+          "party": "Nonpartisan",
+          "incumbent": false,
+          "summary": "Parent volunteer and PTA treasurer.",
+          "record_depth": "thin",
+          "best_case": "Supporters point to Gale's budgeting work for the PTA and focus on classroom resources.",
+          "strongest_criticism": "Critics note Gale has no experience with district-level budgets.",
+          "fit": {
+            "overall": "unknown",
+            "by_issue": [
+              {
+                "issue": "Housing affordability",
+                "rating": "na",
+                "basis": "statement",
+                "note": "Not an issue this office controls."
+              },
+              {
+                "issue": "Economy and cost of living",
+                "rating": "na",
+                "basis": "statement",
+                "note": "Not an issue this office controls."
+              },
+              {
+                "issue": "Crime and public safety",
+                "rating": "unknown",
+                "basis": "statement",
+                "note": "No positions found."
+              }
+            ],
+            "dealbreaker": ""
+          },
+          "links": []
+        },
+        {
+          "id": "c-hart",
+          "name": "Hart Sample",
+          "party": "Nonpartisan",
+          "incumbent": false,
+          "summary": "Retired principal.",
+          "record_depth": "moderate",
+          "best_case": "Supporters cite Hart's record raising graduation rates at a nearby school.",
+          "strongest_criticism": "Critics question whether Hart's approach fits a fast-growing district.",
+          "fit": {
+            "overall": "mixed",
+            "by_issue": [
+              {
+                "issue": "Housing affordability",
+                "rating": "na",
+                "basis": "statement",
+                "note": "Not an issue this office controls."
+              },
+              {
+                "issue": "Economy and cost of living",
+                "rating": "na",
+                "basis": "statement",
+                "note": "Not an issue this office controls."
+              },
+              {
+                "issue": "Crime and public safety",
+                "rating": "good",
+                "basis": "statement",
+                "note": "Published a school-safety plan; no board record."
+              }
+            ],
+            "dealbreaker": ""
+          },
+          "links": []
+        }
+      ],
+      "recommendation": {
+        "candidate_ids": [
+          "c-fran",
+          "c-hart"
+        ],
+        "tie": false,
+        "reasoning": "Of your priorities only public safety applies to this office; both have a moderate fit with different kinds of evidence.",
+        "confidence": "low",
+        "caveats": "Little of your priority list applies to this office, so fit is thin. Read candidate statements on the bond.",
+        "none_reason": ""
+      },
+      "more_research": "Compare candidate positions on the school bond.",
+      "sources": [
+        {
+          "title": "County election office: official candidate list",
+          "url": "https://example.org/school-board",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    }
+  ],
+  "measures": [
+    {
+      "id": "m-1",
+      "level": "County",
+      "number": "Measure A",
+      "title": "Library district parcel tax",
+      "summary": "A ten-year parcel tax to fund library hours and facilities.",
+      "yes_means": "Property owners pay an added annual parcel tax; libraries expand hours and repair facilities.",
+      "no_means": "No new tax; library hours and repairs depend on existing funding.",
+      "fiscal": "Estimated to raise about $2 million per year (sample figure from the county analysis).",
+      "supporters": [
+        "Library Friends coalition",
+        "County school board"
+      ],
+      "opponents": [
+        "Taxpayers association"
+      ],
+      "funding": "Yes campaign: mostly local donors. No campaign: small, mostly self-funded (sample).",
+      "legal_status": "No known legal challenges.",
+      "by_issue": [
+        {
+          "issue": "Education and public schools",
+          "yes_rating": "strong",
+          "no_rating": "poor",
+          "note": "Funds after-school programs."
+        },
+        {
+          "issue": "Fiscal responsibility",
+          "yes_rating": "mixed",
+          "no_rating": "mixed",
+          "note": "New tax, but with a fixed term and annual audit."
+        }
+      ],
+      "lean": "yes",
+      "reasoning": "The measure aligns with your education interest; the fixed term and audit reduce the fiscal concern.",
+      "confidence": "medium",
+      "caveats": "Check how the tax applies to your property type.",
+      "sources": [
+        {
+          "title": "County voter pamphlet: Measure A",
+          "url": "https://example.org/measure-a",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "m-2",
+      "level": "State",
+      "number": "Proposition 2",
+      "title": "Term limits change",
+      "summary": "Changes the term limits for state legislators.",
+      "yes_means": "Legislators may serve longer under a revised cap.",
+      "no_means": "Current term limits stay in place.",
+      "fiscal": "No direct fiscal effect.",
+      "supporters": [
+        "Good Government Alliance"
+      ],
+      "opponents": [
+        "Citizens for Fresh Ideas"
+      ],
+      "funding": "Not yet reported (sample).",
+      "legal_status": "Litigation pending; verify the measure is still on the ballot.",
+      "by_issue": [
+        {
+          "issue": "Government transparency and accountability",
+          "yes_rating": "unknown",
+          "no_rating": "unknown",
+          "note": "Arguments cut both ways; evidence is mixed."
+        }
+      ],
+      "lean": "undecided",
+      "reasoning": "Your stated priorities do not clearly point either way.",
+      "confidence": "low",
+      "caveats": "Read the official analysis before deciding.",
+      "sources": [
+        {
+          "title": "State voter guide: Proposition 2",
+          "url": "https://example.org/prop-2",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "m-judge",
+      "level": "County",
+      "number": "Retention",
+      "title": "Judge Sample Placeholder (retention)",
+      "summary": "A retention vote: keep the judge for another term or not.",
+      "yes_means": "The judge stays in office for another term.",
+      "no_means": "The judge is removed and the seat is filled by appointment.",
+      "fiscal": "None.",
+      "supporters": [],
+      "opponents": [],
+      "funding": "None reported.",
+      "legal_status": "None.",
+      "by_issue": [],
+      "lean": "undecided",
+      "reasoning": "The official performance evaluation was positive and no documented concerns were found; none of your priorities map to this office.",
+      "confidence": "low",
+      "caveats": "Check the official judicial performance evaluation.",
+      "sources": [
+        {
+          "title": "State judicial performance commission (sample)",
+          "url": "https://example.org/judge",
+          "retrieved": "2026-10-08"
+        }
+      ]
+    }
+  ],
+  "open_questions": [
+    "Confirm your exact district numbers with the county's official lookup (a ZIP code can span districts).",
+    "Check whether you can register or update your registration after the deadline in your state."
+  ],
+  "method_notes": "Fit ratings compare each candidate or measure to the priorities you gave, using public records and sourced statements. They are not endorsements and not predictions. Ratings are qualitative and come from evidence the guide cites. Where evidence is thin, the guide says so.",
+  "sources": [
+    {
+      "title": "Sample general source: county election office",
+      "url": "https://example.org/",
+      "retrieved": "2026-10-08"
+    }
+  ],
+  "completeness": {
+    "checked_on": "2026-10-08",
+    "district_basis": "Sample: districts given by the voter from the county lookup; the ZIP spans two ballot styles, so the school board seats depend on the voter's district.",
+    "sources": [
+      {
+        "label": "County candidate list, all districts (sample PDF)",
+        "url": "https://example.org/county/candidate-list.pdf",
+        "kind": "county_candidate_list",
+        "retrieved": "2026-10-08"
+      },
+      {
+        "label": "County sample ballot, ballot style 12 (sample)",
+        "url": "https://example.org/county/sample-ballot-12.pdf",
+        "kind": "sample_ballot",
+        "retrieved": "2026-10-08"
+      },
+      {
+        "label": "State candidate and measure list (sample)",
+        "url": "https://example.org/state/candidates",
+        "kind": "state_candidate_list",
+        "retrieved": "2026-10-08"
+      }
+    ],
+    "levels_checked": [
+      "Federal",
+      "State",
+      "County",
+      "Local"
+    ],
+    "expected": [
+      {
+        "id": "r-house",
+        "type": "race",
+        "label": "U.S. House of Representatives - District 99 (sample)",
+        "level": "Federal",
+        "source": "County candidate list (sample)"
+      },
+      {
+        "id": "r-gov",
+        "type": "race",
+        "label": "Governor and Lieutenant Governor - Statewide (sample)",
+        "level": "State",
+        "source": "County candidate list (sample)"
+      },
+      {
+        "id": "r-sheriff",
+        "type": "race",
+        "label": "County Sheriff - Countywide",
+        "level": "County",
+        "source": "County candidate list (sample)"
+      },
+      {
+        "id": "r-assessor",
+        "type": "race",
+        "label": "County Assessor - Countywide",
+        "level": "County",
+        "source": "County candidate list (sample)"
+      },
+      {
+        "id": "r-school",
+        "type": "race",
+        "label": "School Board - Sample Valley Unified (at large)",
+        "level": "Local",
+        "source": "County candidate list (sample)"
+      },
+      {
+        "id": "m-1",
+        "type": "measure",
+        "label": "Library district parcel tax",
+        "level": "County",
+        "source": "County sample ballot (sample)"
+      },
+      {
+        "id": "m-2",
+        "type": "measure",
+        "label": "Term limits change",
+        "level": "State",
+        "source": "County sample ballot (sample)"
+      },
+      {
+        "id": "m-judge",
+        "type": "measure",
+        "label": "Judge Sample Placeholder (retention)",
+        "level": "County",
+        "source": "County sample ballot (sample)"
+      }
+    ],
+    "unresolved": [
+      {
+        "item": "Mosquito abatement district board seat",
+        "reason": "Sample: the county list shows the seat but no candidate has been confirmed."
+      }
+    ],
+    "independent_check": {
+      "done": true,
+      "method": "A separate agent built its own list from the same sources without seeing the guide.",
+      "discrepancies": [
+        {
+          "item": "Library district parcel tax",
+          "resolution": "Missed in the first pass; added from the sample ballot."
+        }
+      ]
+    }
+  }
+}

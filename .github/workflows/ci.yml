@@ -1,0 +1,27 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Plugin manifest is in sync with skills/
+        run: bun run check:sync
+      - name: Test the install tooling
+        run: bun run test
+      - name: Test every skill
+        run: make check
+      - name: Package every skill
+        run: make package-all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: skills
+          path: dist/*.skill
