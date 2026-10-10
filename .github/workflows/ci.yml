@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test every skill
+        run: make check
+      - name: Package every skill
+        run: make package-all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: skills
+          path: dist/*.skill
