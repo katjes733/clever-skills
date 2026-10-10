@@ -1,0 +1,23 @@
+{
+  "name": "clever-skills",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A collection of agent skills, installable as a Claude Code plugin or with the skills CLI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/katjes733/clever-skills"
+  },
+  "license": "MIT",
+  "scripts": {
+    "changeset": "changeset",
+    "version": "changeset version && node scripts/sync-plugin.mjs",
+    "sync": "node scripts/sync-plugin.mjs",
+    "check:sync": "node scripts/sync-plugin.mjs --check",
+    "install:local": "node scripts/install.mjs",
+    "test": "node --test scripts/test/*.test.mjs",
+    "verify": "bun run check:sync && bun run test && make check"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.30.0"
+  }
+}

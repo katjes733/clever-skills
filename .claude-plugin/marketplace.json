@@ -1,0 +1,17 @@
+{
+  "name": "clever-skills",
+  "owner": {
+    "name": "katjes733",
+    "url": "https://github.com/katjes733"
+  },
+  "description": "katjes733's agent skills, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "clever-skills",
+      "source": "./",
+      "description": "A collection of agent skills, starting with an interview-first, nonpartisan election voter guide.",
+      "category": "productivity",
+      "keywords": ["skills", "voter-guide", "elections"]
+    }
+  ]
+}

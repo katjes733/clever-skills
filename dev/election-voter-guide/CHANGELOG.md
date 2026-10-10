@@ -1,5 +1,7 @@
 # Changelog
 
+History up to 0.5.0. From now on, releases are tracked by Changesets in the repository root `CHANGELOG.md`.
+
 ## Unreleased
 
 - Repository moved to a multi-skill layout (`skills/election-voter-guide/`). No change to the shipped skill; the packager now leaves development files out of the `.skill`.

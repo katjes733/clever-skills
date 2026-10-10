@@ -1,6 +1,6 @@
 """Tests for the guide builder: validation, scoring, template safety, and skill metadata.
 
-Run from the skill folder:  python3 -m unittest discover -s tests -v
+Run from the repository root:  make test SKILL=election-voter-guide
 No third-party dependencies.
 """
 import importlib.util
@@ -10,9 +10,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-SKILL_DIR = Path(__file__).resolve().parent.parent   # skills/<name>/ (this folder)
-SKILL = SKILL_DIR
-ROOT = SKILL_DIR
+DEV_DIR = Path(__file__).resolve().parent.parent     # dev/<name>/ (this folder's parent)
+ROOT = DEV_DIR.parent.parent
+SKILL = ROOT / "skills" / DEV_DIR.name               # skills/<name>/, the shipped skill
 SCRIPT = SKILL / "scripts" / "build_guide.py"
 
 spec = importlib.util.spec_from_file_location("build_guide", SCRIPT)

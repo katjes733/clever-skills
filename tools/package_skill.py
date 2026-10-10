@@ -5,9 +5,8 @@ Usage:
   python3 tools/package_skill.py <name> [OUTPUT_DIR]
   python3 tools/package_skill.py --all [OUTPUT_DIR]
 
-Only the files Claude needs are shipped. Development files at the top level of the skill folder
-(README, CHANGELOG, CONTRIBUTING, LICENSE, Makefile, tests/, docs/, examples/) are left out.
-A skill may override this with a `.skillignore` file (one top-level name per line).
+Ships everything in skills/<name>/. Development files (README, CHANGELOG, tests, docs, examples)
+live in dev/<name>/ and are never part of the skill.
 """
 import re
 import sys
@@ -16,8 +15,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "skills"
-TOP_LEVEL_EXCLUDE = {"README.md", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE", "Makefile",
-                     "tests", "docs", "examples", "dist", ".skillignore"}
 ANY_LEVEL_EXCLUDE = {"__pycache__", ".git", ".DS_Store"}
 
 
@@ -47,17 +44,13 @@ def validate(skill):
 
 def package(skill, out_dir):
     validate(skill)
-    exclude = set(TOP_LEVEL_EXCLUDE)
-    ignore = skill / ".skillignore"
-    if ignore.is_file():
-        exclude = {l.strip() for l in ignore.read_text().splitlines() if l.strip() and not l.startswith("#")} | {".skillignore"}
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / f"{skill.name}.skill"
     n = 0
     with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
         for p in sorted(skill.rglob("*")):
             rel = p.relative_to(skill)
-            if p.is_dir() or rel.parts[0] in exclude or any(x in ANY_LEVEL_EXCLUDE for x in rel.parts) or p.suffix == ".pyc":
+            if p.is_dir() or any(x in ANY_LEVEL_EXCLUDE for x in rel.parts) or p.suffix == ".pyc":
                 continue
             z.write(p, Path(skill.name) / rel)
             n += 1

@@ -12,7 +12,7 @@ prompt and what the agent did.
 **CHECKLIST:**
 
 - [ ] `SKILL.md` name matches folder; `description` still says what the skill does and when to use it
-- [ ] Skill is self-contained (relative paths; dev files stay at the skill's top level)
+- [ ] Skill is self-contained (relative paths); tests, docs and examples live in `dev/<name>/`, not in the skill
 - [ ] Tests added/updated as needed
-- [ ] `make check` passes
-- [ ] `CHANGELOG.md` updated under "Unreleased"
+- [ ] `bun run verify` passes
+- [ ] Changeset added with `bun run changeset` (skip for dev-only changes)

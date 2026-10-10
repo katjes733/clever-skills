@@ -1,0 +1,19 @@
+{
+  "name": "clever-skills",
+  "version": "0.0.0",
+  "description": "A collection of agent skills, starting with an interview-first, nonpartisan election voter guide.",
+  "author": {
+    "name": "katjes733",
+    "url": "https://github.com/katjes733"
+  },
+  "repository": "https://github.com/katjes733/clever-skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "voter-guide",
+    "elections"
+  ],
+  "skills": [
+    "./skills/election-voter-guide"
+  ]
+}

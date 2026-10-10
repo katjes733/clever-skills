@@ -8,3 +8,4 @@ __pycache__/
 guide-data*.json
 my-guide*.html
 my-guide*.json
+node_modules/

@@ -80,41 +80,43 @@ Tips:
 ## Repository layout
 
 ```
-skills/election-voter-guide/
-  SKILL.md                     Instructions: interview script, workflow, contract   ┐
-  references/                  Playbooks and facts, read on demand                  │ shipped in
-    interview-playbook.md      Question wording, input modes, edge cases            │ the .skill
-    research-playbook.md       Source tiers, ballot inventory, verification         │
-    recommendation-logic.md    Fit method, scoring, neutrality, confidence          │
-    presentation-guide.md      Guide stages, data file, accessibility, privacy      │
-    offices-primer.md          Which issues an office can influence                 │
-    election-systems.md        Voting methods and country notes                     │
-    snapshots/                 Dated, per-election facts (+ _template.md)           │
-  assets/                      voter-guide-template.html, sample-guide.json         │
-  scripts/build_guide.py       Validates data, computes scores, builds the page     ┘
-  README.md  CHANGELOG.md  CONTRIBUTING.md    Development files, not shipped
-  tests/  docs/  examples/                    Development files, not shipped
-  Makefile                                    test / sample targets for this skill
+skills/election-voter-guide/   What agents install: nothing else is copied to users
+  SKILL.md                     Instructions: interview script, workflow, contract
+  references/                  Playbooks and facts, read on demand
+    interview-playbook.md      Question wording, input modes, edge cases
+    research-playbook.md       Source tiers, ballot inventory, verification
+    recommendation-logic.md    Fit method, scoring, neutrality, confidence
+    presentation-guide.md      Guide stages, data file, accessibility, privacy
+    offices-primer.md          Which issues an office can influence
+    election-systems.md        Voting methods and country notes
+    snapshots/                 Dated, per-election facts (+ _template.md)
+  assets/                      voter-guide-template.html, sample-guide.json
+  scripts/build_guide.py       Validates data, computes scores, builds the page
+dev/election-voter-guide/      Development files, never installed
+  README.md  CHANGELOG.md  CONTRIBUTING.md
+  tests/  docs/  examples/  Makefile
 ```
 
 ## Develop
 
+Run these from the repository root:
+
 ```bash
-make test      # unit tests (run inside this folder)
-make sample    # rebuild examples/sample-guide.html
-# from the repository root:  make package SKILL=election-voter-guide
+make test SKILL=election-voter-guide      # unit tests
+make sample SKILL=election-voter-guide    # rebuild dev/election-voter-guide/examples/sample-guide.html
+make package SKILL=election-voter-guide   # dist/election-voter-guide.skill
 ```
 
 Build a guide from your own data file (keep real ones out of version control; `.gitignore` already excludes common names):
 
 ```bash
-python3 scripts/build_guide.py my-guide.json /path/outside/assets/guide.html
-python3 scripts/build_guide.py my-guide.json --check   # validate only
+python3 skills/election-voter-guide/scripts/build_guide.py my-guide.json /path/outside/assets/guide.html
+python3 skills/election-voter-guide/scripts/build_guide.py my-guide.json --check   # validate only
 ```
 
 ## Adding another election
 
-The workflow never changes; only facts do. Copy `references/snapshots/_template.md` to `<country>-<election>-<year>.md`, fill it with researched, dated facts, and list it in `SKILL.md`. Add a country's election authorities to the research playbook if missing. Snapshots decay quickly: always re-verify before use.
+The workflow never changes; only facts do. Copy `skills/election-voter-guide/references/snapshots/_template.md` to `<country>-<election>-<year>.md`, fill it with researched, dated facts, and list it in `SKILL.md`. Add a country's election authorities to the research playbook if missing. Snapshots decay quickly: always re-verify before use.
 
 ## Known limitations
 
